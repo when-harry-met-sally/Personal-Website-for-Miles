@@ -27,8 +27,8 @@
   height: 20px;
 }
 
-.red {
-  background-color: red;
+.black {
+  background-color: black;
 }
 
 .clear {
@@ -38,4 +38,35 @@
 .shape-grid {
   border: 1px solid black;
   width: fit-content;
+}
+
+.shape-1 {
+  background-color: rgb(109, 231, 247);
+}
+.shape-2 {
+  background-color: rgb(159, 243, 159);
+}
+.shape-3 {
+  background-color: green;
+}
+.shape-4 {
+  background-color: rgb(253, 133, 253);
+}
+.shape-5 {
+  background-color: rgb(243, 252, 124);
+}
+.shape-6 {
+  background-color: rgb(80, 224, 205);
+}
+.shape-7 {
+  background-color: rgb(241, 195, 125);
+}
+.shape-8 {
+  background-color: rgb(155, 61, 243);
+}
+.shape-9 {
+  background-color: rgb(200, 245, 224);
+}
+.shape-10 {
+  background-color: rgb(252, 124, 124);
 }

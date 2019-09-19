@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Frame({ width, height, coordinates, handleSetCoordinates }) {
   let Grid = ({ children }) => <div className="shape-grid">{children}</div>;
@@ -8,8 +8,15 @@ function Frame({ width, height, coordinates, handleSetCoordinates }) {
     let row = [];
     for (let x = 0; x < width; x++) {
       row.push(
-        <span key={x}
-          className={coordinates[y][x].occupied ? "square red" : "square clear"}
+        <span
+          key={x}
+          className={
+            coordinates[y][x].occupied
+              ? coordinates[y][x].occupied === true
+                ? "square black"
+                : "square shape-" + coordinates[y][x].occupied
+              : "square clear"
+          }
           onClick={() => handleSetCoordinates && handleSetCoordinates(x, y)}
         />
       );

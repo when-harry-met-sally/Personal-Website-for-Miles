@@ -2,6 +2,9 @@ const arrayContainsPoint = (point, array) => {
   for (let i = 0; i < array.length; i++) {
     const pointInArray = array[i];
     if (pointInArray.x === point.x && pointInArray.y === point.y) {
+      if (pointInArray.occupied) {
+        return pointInArray.occupied;
+      }
       return true;
     }
   }
