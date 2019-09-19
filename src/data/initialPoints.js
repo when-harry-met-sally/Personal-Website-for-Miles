@@ -12,7 +12,7 @@ export default [
     y: 2,
   },
   {
-    x: 0,
-    y: 4,
+    x: 1,
+    y: 2,
   }
 ];

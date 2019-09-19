@@ -17,11 +17,10 @@ export const createGrid = (height, width, coordinates) => {
       row.push({
         x: x,
         y: y,
-        occupied
+        occupied: occupied
       });
     }
     cords.push(row);
   }
-
   return cords;
 };
