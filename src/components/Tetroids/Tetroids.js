@@ -6,7 +6,6 @@ import { differentiate } from "../../helpers/differentiate";
 import { shapeForm } from "../../helpers/shapeForm";
 import * as _ from "lodash";
 import { Grid } from "semantic-ui-react";
-import { generateRotations } from "../../helpers/generateRotations";
 function Tetroids() {
   const width = 5;
   const height = 5;
@@ -25,7 +24,6 @@ function Tetroids() {
     setDifferentiated(diff);
     setShapes(shapeForm(diff));
   };
-  console.log(generateRotations(shapes[0]));
   return (
     <div>
       <Grid>
@@ -42,20 +40,22 @@ function Tetroids() {
             <Frame width={width} height={height} coordinates={differentiated} />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          {shapes.map((shape, i) => {
-            return (
-              <Grid.Column width={2} key={i}>
+
+        {shapes.map(shape => (
+          <Grid.Row>
+            {" "}
+            {shape.map((permutation, j) => (
+              <Grid.Column width={2} key={j}>
                 <Frame
                   width={width}
                   height={height}
-                  coordinates={createGrid(width, height, shape)}
+                  coordinates={createGrid(width, height, permutation)}
                 />
                 <br />
               </Grid.Column>
-            );
-          })}
-        </Grid.Row>
+            ))}
+          </Grid.Row>
+        ))}
       </Grid>
     </div>
   );
