@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-export const differentiate = grid => {
+export const differentiate = (grid) => {
   grid = _.cloneDeep(grid);
   let count = 0;
   findNeighbors(grid, count);

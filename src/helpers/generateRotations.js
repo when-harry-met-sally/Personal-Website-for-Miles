@@ -1,3 +1,5 @@
+import { shrink }  from "./shrink";
+
 export const generateRotations = points => {
   let permutations = [];
   const signs = [-1, 1];
@@ -21,6 +23,7 @@ export const generateRotations = points => {
               };
           permutation.push(newPoint);
         });
+        console.log(permutation);
         shrink(sortPoints(permutation));
         if (!isRepeatPermutation(permutations, permutation)) {
           permutations.push(permutation);
@@ -44,26 +47,6 @@ const sortPoints = points => {
       } else {
         return -1;
       }
-    }
-  });
-  return points;
-};
-
-const shrink = points => {
-  const xCords = [];
-  const yCords = [];
-  points.forEach(point => {
-    xCords.push(point.x);
-    yCords.push(point.y);
-  });
-  const xMin = Math.min.apply(null, xCords);
-  const yMin = Math.min.apply(null, yCords);
-  points.forEach(point => {
-    if (xMin !== 0) {
-      point.x -= xMin;
-    }
-    if (yMin !== 0) {
-      point.y -= yMin;
     }
   });
   return points;

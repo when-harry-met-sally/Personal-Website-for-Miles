@@ -1,6 +1,6 @@
 import { generateRotations } from "./generateRotations";
 
-export const shapeForm = grid => {
+export const shapeForm = (grid, container) => {
   const shapeMap = {};
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[y].length; x++) {
@@ -14,6 +14,15 @@ export const shapeForm = grid => {
     }
   }
   const shapes = [];
-  Object.values(shapeMap).forEach(shape => shapes.push(generateRotations(shape)));
+  if (container) {
+    const containers = Object.values(shapeMap);
+    if (containers.length !== 1) {
+      return null;
+    }
+    return containers[0];
+  }
+  Object.values(shapeMap).forEach(shape =>
+    shapes.push(generateRotations(shape))
+  );
   return shapes;
 };
