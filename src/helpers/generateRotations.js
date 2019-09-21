@@ -23,7 +23,6 @@ export const generateRotations = points => {
               };
           permutation.push(newPoint);
         });
-        console.log(permutation);
         shrink(sortPoints(permutation));
         if (!isRepeatPermutation(permutations, permutation)) {
           permutations.push(permutation);
@@ -61,7 +60,7 @@ const isRepeatPermutation = (permutations, permutation) => {
   return false;
 };
 
-const stringify = points => {
+export const stringify = points => {
   let string = "";
   points.forEach(point => {
     string += "(" + point.x + "," + point.y + ")";

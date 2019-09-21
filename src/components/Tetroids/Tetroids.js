@@ -7,8 +7,9 @@ import { differentiate } from "../../helpers/differentiate";
 import { calculateMass } from "../../helpers/calculateMass";
 import { shapeForm } from "../../helpers/shapeForm";
 import * as _ from "lodash";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button, Message } from "semantic-ui-react";
 import { solve } from "../../helpers/solve";
+import { unshrink } from "../../helpers/shrink";
 function Tetroids() {
   const width = 5;
   const height = 5;
@@ -23,14 +24,18 @@ function Tetroids() {
   const [container, setContainer] = useState(
     createGrid(width, height, initialContainer)
   );
-  const [solved, setSolved] = useState(container);
+  console.log(shapes)
+  const [solved, setSolved] = useState(
+    // createGrid(width, height, unshrink(container, solve(container, shapes)))
+   container
+  );
 
   const [mass, setMass] = useState({
     shapes: calculateMass(coordinates),
     container: calculateMass(container)
   });
-
   const handleSetCoordinates = (x, y) => {
+    console.log('test');
     const copy = _.cloneDeep(coordinates);
     copy[y][x].occupied = !copy[y][x].occupied;
     const diff = differentiate(copy);
@@ -41,6 +46,7 @@ function Tetroids() {
       ...mass,
       shapes: calculateMass(copy)
     });
+    // startSolve(copy, );
   };
 
   const handleSetContainer = (x, y) => {
@@ -51,47 +57,64 @@ function Tetroids() {
       ...mass,
       container: calculateMass(copy)
     });
+    // startSolve();
   };
 
   const startSolve = () => {
-    console.log(container);
-    solve(container, shapes);
+    if (mass.shapes !== mass.container){
+      return;
+    }
+    let solution = solve(container, shapes);
+    if (solution) {
+      solution = unshrink(container, solution);
+      setSolved(createGrid(width, height, solution));
+    } else {
+      alert('no solution')
+    }
   };
-
   return (
     <div>
       <Grid>
         <Grid.Row>
-          <Grid.Column width={2}>
+          <Grid.Column width={4}>
             <Frame
               width={width}
               height={height}
               coordinates={coordinates}
               handleSetCoordinates={handleSetCoordinates}
+              styling={{ row: "large-row", square: "square large" }}
             />
+            <Message className='frame-message'>Create Shapes</Message>
           </Grid.Column>
-          <Grid.Column width={2}>
-            <Frame width={width} height={height} coordinates={differentiated} />
+          <Grid.Column width={4}>
+            <Frame
+              width={width}
+              height={height}
+              coordinates={differentiated}
+              styling={{ row: "large-row", square: "square large" }}
+            />
+             <Message className='frame-message'>Differentiated Shapes</Message>
           </Grid.Column>
-          <Grid.Column width={2}>
+          <Grid.Column width={4}>
             <Frame
               width={width}
               height={height}
               coordinates={container}
               handleSetCoordinates={handleSetContainer}
+              styling={{ row: "large-row", square: "square large" }}
             />
+             <Message className='frame-message'>Create a Container</Message>
           </Grid.Column>
-          <Grid.Column width={2}>
-            <Frame width={width} height={height} coordinates={solved} />
+          <Grid.Column width={4}>
+            <Frame
+              width={width}
+              height={height}
+              coordinates={solved}
+              styling={{ row: "large-row", square: "square large" }}
+            />
+               <Message className='frame-message'>Solved Puzzle</Message>
           </Grid.Column>
-          <Grid.Column width={2}>
-            <div>
-              {mass.shapes} / {mass.container}
-            </div>
-            <Button primary onClick={startSolve}>
-              Solve
-            </Button>
-          </Grid.Column>
+       
         </Grid.Row>
 
         {shapes.map((shape, i) => (
@@ -103,6 +126,7 @@ function Tetroids() {
                   width={width}
                   height={height}
                   coordinates={createGrid(width, height, permutation)}
+                  styling={{ row: "small-row", square: "square small" }}
                 />
                 <br />
               </Grid.Column>
@@ -110,6 +134,13 @@ function Tetroids() {
           </Grid.Row>
         ))}
       </Grid>
+
+      <div>
+        {mass.shapes} / {mass.container}
+      </div>
+      <Button primary onClick={startSolve}>
+        Solve
+      </Button>
     </div>
   );
 }

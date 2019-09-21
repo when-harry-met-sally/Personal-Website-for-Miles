@@ -19,12 +19,24 @@
 
 .square {
   display: inline-block;
+}
+
+.small {
   height: 20px;
   width: 20px;
 }
 
-.shape-row {
+.large { 
+  height: 40px;
+  width: 40px;
+}
+
+.small-row {
   height: 20px;
+}
+
+.large-row {
+  height: 40px;
 }
 
 .black {
@@ -69,4 +81,8 @@
 }
 .shape-10 {
   background-color: rgb(252, 124, 124);
+}
+
+.frame-message {
+  width: 202px;
 }
