@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Frame from "./Frame";
 import initialPoints from "../../data/initialPoints";
 import initialContainer from "../../data/initialContainer";
@@ -24,18 +24,17 @@ function Tetroids() {
   const [container, setContainer] = useState(
     createGrid(width, height, initialContainer)
   );
-  console.log(shapes)
-  const [solved, setSolved] = useState(
-    // createGrid(width, height, unshrink(container, solve(container, shapes)))
-   container
-  );
-
+  const [solved, setSolved] = useState(container);
+  useEffect(() => {
+    setSolved(
+      createGrid(width, height, unshrink(container, solve(container, shapes)))
+    );
+  }, []);
   const [mass, setMass] = useState({
     shapes: calculateMass(coordinates),
     container: calculateMass(container)
   });
   const handleSetCoordinates = (x, y) => {
-    console.log('test');
     const copy = _.cloneDeep(coordinates);
     copy[y][x].occupied = !copy[y][x].occupied;
     const diff = differentiate(copy);
@@ -46,7 +45,6 @@ function Tetroids() {
       ...mass,
       shapes: calculateMass(copy)
     });
-    // startSolve(copy, );
   };
 
   const handleSetContainer = (x, y) => {
@@ -57,11 +55,11 @@ function Tetroids() {
       ...mass,
       container: calculateMass(copy)
     });
-    // startSolve();
   };
 
   const startSolve = () => {
-    if (mass.shapes !== mass.container){
+    console.log("STARTSOLVE");
+    if (mass.shapes !== mass.container) {
       return;
     }
     let solution = solve(container, shapes);
@@ -69,7 +67,7 @@ function Tetroids() {
       solution = unshrink(container, solution);
       setSolved(createGrid(width, height, solution));
     } else {
-      alert('no solution')
+      setSolved(null);
     }
   };
   return (
@@ -83,8 +81,9 @@ function Tetroids() {
               coordinates={coordinates}
               handleSetCoordinates={handleSetCoordinates}
               styling={{ row: "large-row", square: "square large" }}
+              hover={true}
             />
-            <Message className='frame-message'>Create Shapes</Message>
+            <Message className="frame-message">Create Shapes</Message>
           </Grid.Column>
           <Grid.Column width={4}>
             <Frame
@@ -93,7 +92,7 @@ function Tetroids() {
               coordinates={differentiated}
               styling={{ row: "large-row", square: "square large" }}
             />
-             <Message className='frame-message'>Differentiated Shapes</Message>
+            <Message className="frame-message">Differentiated Shapes</Message>
           </Grid.Column>
           <Grid.Column width={4}>
             <Frame
@@ -102,19 +101,25 @@ function Tetroids() {
               coordinates={container}
               handleSetCoordinates={handleSetContainer}
               styling={{ row: "large-row", square: "square large" }}
+              hover={true}
             />
-             <Message className='frame-message'>Create a Container</Message>
+            <Message className="frame-message">Create a Container</Message>
           </Grid.Column>
           <Grid.Column width={4}>
             <Frame
               width={width}
               height={height}
-              coordinates={solved}
+              coordinates={solved ? solved : createGrid(width, height, [])}
               styling={{ row: "large-row", square: "square large" }}
             />
-               <Message className='frame-message'>Solved Puzzle</Message>
+            <Message
+              negative={!solved}
+              positive={solved}
+              className="frame-message"
+            >
+              {solved ? "Solved Puzzle" : "No Solution"}
+            </Message>
           </Grid.Column>
-       
         </Grid.Row>
 
         {shapes.map((shape, i) => (

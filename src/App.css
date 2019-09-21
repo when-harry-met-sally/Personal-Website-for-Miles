@@ -86,3 +86,7 @@
 .frame-message {
   width: 202px;
 }
+
+.square-hover:hover {
+  background-color: rgb(156, 156, 156);
+}

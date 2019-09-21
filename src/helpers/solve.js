@@ -2,7 +2,8 @@ import * as _ from "lodash";
 import { shrink } from "./shrink";
 
 export const solve = (container, shapes) => {
-    console.log(shapes);
+  console.log(shapes);
+  console.log("solving");
   shapes = _.cloneDeep(shapes);
   container = _.cloneDeep(container);
   container = shrink(container, true);
@@ -51,7 +52,10 @@ export const solve = (container, shapes) => {
             if (collisionsTest(allPositions)) {
               continue;
             }
-            if (shapes.length === 4 && allPositions.length === container.length) {
+            if (
+              shapes.length === 4 &&
+              allPositions.length === container.length
+            ) {
               return allPositions;
             }
             for (let s4 = 0; s4 < shapes[4].positions.length; s4++) {
@@ -65,7 +69,10 @@ export const solve = (container, shapes) => {
               if (collisionsTest(allPositions)) {
                 continue;
               }
-              if (shapes.length === 5 && allPositions.length === container.length) {
+              if (
+                shapes.length === 5 &&
+                allPositions.length === container.length
+              ) {
                 return allPositions;
               }
               for (let s5 = 0; s5 < shapes[5].positions.length; s5++) {
@@ -80,7 +87,10 @@ export const solve = (container, shapes) => {
                 if (collisionsTest(allPositions)) {
                   continue;
                 }
-                if (shapes.length === 6 && allPositions.length === container.length) {
+                if (
+                  shapes.length === 6 &&
+                  allPositions.length === container.length
+                ) {
                   return allPositions;
                 }
               }
