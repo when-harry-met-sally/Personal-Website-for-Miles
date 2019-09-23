@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { List, Card, Input, Divider, Image } from "semantic-ui-react";
 import axios from "axios";
 import { elastic } from "../../helpers/elastic";
+import { githubKey } from "../../../api";
 function Projects() {
   const [repos, setRepos] = useState([]);
   const [filteredRepos, setFilteredRepos] = useState(repos);
@@ -9,11 +10,11 @@ function Projects() {
     axios
       .get("https://api.github.com/users/miles-moran/repos", {
         headers: {
-          Authorization: "Bearer af7ff635a1636c601a9dbc19b022c937161c6a82"
+          Authorization: "Bearer " + githubKey
         }
       })
       .then(res => {
-        setRepos(res.data);
+        setRepos(res.data); 
         setFilteredRepos(res.data);
       });
   };
