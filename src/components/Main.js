@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
-import Content from "./Content";
+import Tetroids from "./Tetroids/Tetroids";
+import { Container } from "semantic-ui-react";
+import Resume from "./Resume/Resume";
 
 function Main() {
+  const [activeItem, setActiveItem] = useState("home");
+  const handleNavClick = destination => {
+    setActiveItem(destination);
+  };
+  let content;
+  switch (activeItem) {
+    case "home":
+      content = <Tetroids />;
+      break;
+    case "resume":
+      content = <Resume/>
+      break;
+  }
   return (
     <>
-      <Nav />
-      <Content />
+      <Nav activeItem={activeItem} handleNavClick={handleNavClick} />
+      <Container>{content}</Container>
     </>
   );
 }

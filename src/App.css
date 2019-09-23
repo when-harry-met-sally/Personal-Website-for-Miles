@@ -85,8 +85,9 @@
 
 .frame-message {
   width: 202px;
+  text-align: center;
 }
 
 .square-hover:hover {
-  background-color: rgb(156, 156, 156);
+  background-color: black;
 }

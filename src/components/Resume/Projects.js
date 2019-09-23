@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { List, Card, Input, Divider, Icon, Image } from "semantic-ui-react";
+import { List, Card, Input, Divider, Image } from "semantic-ui-react";
 import axios from "axios";
-import { elastic } from "../helpers/elastic";
+import { elastic } from "../../helpers/elastic";
 function Projects() {
   const [repos, setRepos] = useState([]);
   const [filteredRepos, setFilteredRepos] = useState(repos);
@@ -39,7 +39,7 @@ function Projects() {
         <span>({filteredRepos.length}) Results</span>
       </Card.Content>
 
-      <List divided relaxed className='github-list'>
+      <List divided relaxed className="github-list">
         {filteredRepos.length !== 0 ? (
           filteredRepos.map((repo, i) => (
             <>
@@ -67,7 +67,9 @@ function Projects() {
               />
               <List.Content>
                 <List.Header>Miles Moran</List.Header>
-                <List.Description>NO RESULTS. VISIT MY REPOSITORY</List.Description>
+                <List.Description>
+                  NO RESULTS. VISIT MY REPOSITORY
+                </List.Description>
               </List.Content>
             </List.Item>
           </>

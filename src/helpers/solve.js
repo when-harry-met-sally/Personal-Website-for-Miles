@@ -2,8 +2,6 @@ import * as _ from "lodash";
 import { shrink } from "./shrink";
 
 export const solve = (container, shapes) => {
-  console.log(shapes);
-  console.log("solving");
   shapes = _.cloneDeep(shapes);
   container = _.cloneDeep(container);
   container = shrink(container, true);
