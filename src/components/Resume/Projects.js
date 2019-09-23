@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { List, Card, Input, Divider, Image } from "semantic-ui-react";
 import axios from "axios";
 import { elastic } from "../../helpers/elastic";
-import { githubKey } from "../../../api";
 function Projects() {
   const [repos, setRepos] = useState([]);
   const [filteredRepos, setFilteredRepos] = useState(repos);
