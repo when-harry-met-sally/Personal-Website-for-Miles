@@ -5,8 +5,8 @@ function ResumeFile() {
   return (
     <embed
       src={Resume}
-      width="500"
-      height="700"
+      width="750"
+      height="1050"
       type="application/pdf"
     />
   );

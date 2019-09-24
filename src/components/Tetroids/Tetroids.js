@@ -58,7 +58,6 @@ function Tetroids() {
   };
 
   const startSolve = () => {
-    console.log("STARTSOLVE");
     if (mass.shapes !== mass.container) {
       return;
     }
@@ -71,8 +70,45 @@ function Tetroids() {
     }
   };
   return (
-    <div>
-      <Grid>
+      <Grid centered>
+        <Grid.Row>
+          <Grid.Column width={8}>
+            <Message color={"teal"} className="height-hundred-percent">
+              <Message.Header>Polyomino Solver: JavaScript</Message.Header>
+              <Message.Content>
+                <div>
+                  This polyomino packing puzzle solver written in JavaScript.{" "}
+                </div>
+                <div>1) &nbsp; &nbsp;Create shapes in box one.</div>
+                <div>2) &nbsp; &nbsp;Create a container in box two.</div>
+                <div>3) &nbsp; &nbsp;Solve!</div>
+              </Message.Content>
+            </Message>
+          </Grid.Column>
+          <Grid.Column width={8}>
+            <Message color={"blue"} className="height-hundred-percent">
+              <Message.Header>How It Works:</Message.Header>
+              <Message.Content>
+                <div>
+                  The program takes the shapes as points on a coordinate plane.
+                  It then finds the ways the shapes can be rotated. It then
+                  brute forces its way through every way the shapes can be
+                  rearranged until it finds a combination that fits.{" "}
+                </div>
+                <div>
+                  {mass.shapes} / {mass.container}
+                </div>
+                <Button
+                  primary
+                  onClick={startSolve}
+                  disabled={mass.shapes !== mass.container}
+                >
+                  Solve
+                </Button>
+              </Message.Content>
+            </Message>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column width={4}>
             <Frame
@@ -83,16 +119,9 @@ function Tetroids() {
               styling={{ row: "large-row", square: "square large" }}
               hover={true}
             />
-            <Message className="frame-message">Create Shapes</Message>
-          </Grid.Column>
-          <Grid.Column width={4}>
-            <Frame
-              width={width}
-              height={height}
-              coordinates={differentiated}
-              styling={{ row: "large-row", square: "square large" }}
-            />
-            <Message className="frame-message">Differentiated Shapes</Message>
+            <Message color={"yellow"} className="frame-message">
+              Create Shapes
+            </Message>
           </Grid.Column>
           <Grid.Column width={4}>
             <Frame
@@ -103,8 +132,22 @@ function Tetroids() {
               styling={{ row: "large-row", square: "square large" }}
               hover={true}
             />
-            <Message className="frame-message">Create a Container</Message>
+            <Message color={"yellow"} className="frame-message">
+              Create a Container
+            </Message>
           </Grid.Column>
+          <Grid.Column width={4}>
+            <Frame
+              width={width}
+              height={height}
+              coordinates={differentiated}
+              styling={{ row: "large-row", square: "square large" }}
+            />
+            <Message color={"yellow"} className="frame-message">
+              Differentiated Shapes
+            </Message>
+          </Grid.Column>
+
           <Grid.Column width={4}>
             <Frame
               width={width}
@@ -123,8 +166,7 @@ function Tetroids() {
         </Grid.Row>
 
         {shapes.map((shape, i) => (
-          <Grid.Row key={i}>
-            {" "}
+          <Grid.Row centered key={i}>
             {shape.map((permutation, j) => (
               <Grid.Column width={2} key={j}>
                 <Frame
@@ -139,14 +181,6 @@ function Tetroids() {
           </Grid.Row>
         ))}
       </Grid>
-
-      <div>
-        {mass.shapes} / {mass.container}
-      </div>
-      <Button primary onClick={startSolve}>
-        Solve
-      </Button>
-    </div>
   );
 }
 

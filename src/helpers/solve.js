@@ -91,6 +91,47 @@ export const solve = (container, shapes) => {
                 ) {
                   return allPositions;
                 }
+                for (let s6 = 0; s6 < shapes[6].positions.length; s6++) {
+                  allPositions = [
+                    ...shapes[0].positions[s0],
+                    ...shapes[1].positions[s1],
+                    ...shapes[2].positions[s2],
+                    ...shapes[3].positions[s3],
+                    ...shapes[4].positions[s4],
+                    ...shapes[5].positions[s5],
+                    ...shapes[6].positions[s6]
+                  ];
+                  if (collisionsTest(allPositions)) {
+                    continue;
+                  }
+                  if (
+                    shapes.length === 7 &&
+                    allPositions.length === container.length
+                  ) {
+                    return allPositions;
+                  }
+                  for (let s7 = 0; s7 < shapes[7].positions.length; s7++) {
+                    allPositions = [
+                      ...shapes[0].positions[s0],
+                      ...shapes[1].positions[s1],
+                      ...shapes[2].positions[s2],
+                      ...shapes[3].positions[s3],
+                      ...shapes[4].positions[s4],
+                      ...shapes[5].positions[s5],
+                      ...shapes[6].positions[s6],
+                      ...shapes[7].positions[s7]
+                    ];
+                    if (collisionsTest(allPositions)) {
+                      continue;
+                    }
+                    if (
+                      shapes.length === 8 &&
+                      allPositions.length === container.length
+                    ) {
+                      return allPositions;
+                    }
+                  }
+                }
               }
             }
           }

@@ -7,10 +7,10 @@ function Resume() {
   return (
     <Grid>
       <Grid.Row>
-        <Grid.Column width={8}>
+        <Grid.Column width={11}>
           <ResumeFile />
         </Grid.Column>
-        <Grid.Column width={8}>
+        <Grid.Column width={5}>
           <Projects />
         </Grid.Column>
       </Grid.Row>
