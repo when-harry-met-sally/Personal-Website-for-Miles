@@ -13,12 +13,6 @@ function Nav({activeItem, handleNavClick}) {
           </Grid.Row>
           <Grid.Row>
             <Menu.Item
-              name="Home"
-              as="a"
-              active={activeItem === "home"}
-              onClick={() => handleNavClick("home")}
-            />
-            <Menu.Item
               name="Résumé"
               as="a"
               active={activeItem === "resume"}
@@ -26,17 +20,17 @@ function Nav({activeItem, handleNavClick}) {
             >
               Résumé
             </Menu.Item>
-            <Menu.Item
-              name="Projects"
-              as="a"
-              active={activeItem === "projects"}
-              onClick={() => handleNavClick("projects")}
-            />
                  <Menu.Item
               name="Puzzle Solver"
               as="a"
               active={activeItem === "tetroids"}
               onClick={() => handleNavClick("tetroids")}
+            />
+                     <Menu.Item
+              name="Highlight Search"
+              as="a"
+              active={activeItem === "highlight"}
+              onClick={() => handleNavClick("highlight")}
             />
           </Grid.Row>
         </Grid>

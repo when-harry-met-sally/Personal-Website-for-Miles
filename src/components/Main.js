@@ -3,17 +3,17 @@ import Nav from "./Nav";
 import Tetroids from "./Tetroids/Tetroids";
 import { Container } from "semantic-ui-react";
 import Resume from "./Resume/Resume";
-import Home from "./Home";
+import Highlight from "./Highlight/Highlight";
 
 function Main() {
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("resume");
   const handleNavClick = destination => {
     setActiveItem(destination);
   };
   let content;
   switch (activeItem) {
-    case "home":
-      content = <Home />;
+    case "highlight":
+      content = <Highlight/>
       break;
     case "resume":
       content = <Resume />;
@@ -22,7 +22,7 @@ function Main() {
       content = <Tetroids />;
       break;
     default:
-      content = <Home />;
+      content = <Resume />;
       break;
   }
   return (

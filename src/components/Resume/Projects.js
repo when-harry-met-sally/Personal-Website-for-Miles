@@ -14,7 +14,7 @@ function Projects() {
         }
       })
       .then(res => {
-        setRepos(res.data); 
+        setRepos(res.data);
         setFilteredRepos(res.data);
       });
   };
@@ -43,37 +43,31 @@ function Projects() {
       <List divided relaxed className="github-list">
         {filteredRepos.length !== 0 ? (
           filteredRepos.map((repo, i) => (
-            <>
-              {i === 0 && <Divider />}
-              <List.Item key={i} className="github-item">
-                <List.Icon name="github" size="large" verticalAlign="middle" />
-                <List.Content>
-                  <List.Header href={repo.html_url}>
-                    {repo.name} <span className="right">{repo.language}</span>
-                  </List.Header>
-                  <List.Description as="a">
-                    Updated {Date(repo.updated_at)}
-                  </List.Description>
-                </List.Content>
-              </List.Item>
-            </>
-          ))
-        ) : (
-          <>
-            <Divider />
-            <List.Item className="github-item">
-              <Image
-                avatar
-                src={repos.length !== 0 && repos[0].owner.avatar_url}
-              />
+            <List.Item key={i} className="github-item">
+              <List.Icon name="github" size="large" verticalAlign="middle" />
               <List.Content>
-                <List.Header>Miles Moran</List.Header>
-                <List.Description>
-                  NO RESULTS. VISIT MY REPOSITORY
+                <List.Header href={repo.html_url}>
+                  {repo.name} <span className="right">{repo.language}</span>
+                </List.Header>
+                <List.Description as="a">
+                  Updated {Date(repo.updated_at)}
                 </List.Description>
               </List.Content>
             </List.Item>
-          </>
+          ))
+        ) : (
+          <List.Item className="github-item">
+            <Image
+              avatar
+              src={repos.length !== 0 && repos[0].owner.avatar_url}
+            />
+            <List.Content>
+              <List.Header>Miles Moran</List.Header>
+              <List.Description>
+                NO RESULTS. VISIT MY REPOSITORY
+              </List.Description>
+            </List.Content>
+          </List.Item>
         )}
       </List>
     </Card>

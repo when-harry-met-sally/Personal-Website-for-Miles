@@ -15,7 +15,9 @@
   background-color: rgb(255, 208, 119);
 }
 .github-list {
-  margin-top: -1.3rem !important;
+  margin-top: -1rem !important;
+  height: 983px;
+  overflow: auto;
 }
 
 .square {
